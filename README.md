@@ -2,7 +2,7 @@
 
 **BidAhs' Toolbox** is a lightweight, static web-based toolbox of commonly used utilities. It’s designed to be fast, visually appealing, and easy to use, with multiple theme options and a variety of tools.
 
-💻 **Try it online:** [https://bidahs.github.io/BidAhs-Toolbox/](https://bidahs.github.io/BidAhs-Toolbox/)
+💻 **Try it here!** --> [BidAhs' Toolbox](https://bidahs.github.io/BidAhs-Toolbox/)
 ---
 
 ## Tools
