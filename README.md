@@ -13,7 +13,6 @@
 - **Word Counter:** Count the number of words in your text.
 - **Reverse Text:** Reverse any input text instantly.
 - **HEX ↔ RGB Converter:** Convert color codes between HEX and RGB.
-- **Multi-page Navigation:** Navigate to additional tools on a second page.
 
 **CSS & HTML Features Used:**
 
