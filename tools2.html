@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bidahs' Toolbox 🧰</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem 0;
+      background: var(--header-bg);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section.tool {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+
+    section.tool:hover {
+      transform: translateY(-4px);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--accent);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--accent); 
+      cursor: pointer; 
+      transition: opacity 0.2s ease;
+    }
+
+    a:hover {
+      opacity: 0.8; 
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      background: #334155;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--btn-text);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0.2rem;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent-hover);
+    }
+
+    .result {
+      background: #334155;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      min-height: 60px;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--header-bg);
+      color: #94a3b8;
+    }
+
+    .nav-btn {
+      display: block;
+      margin: 1rem auto;
+      background: var(--accent);
+      color: var(--btn-text);
+    }
+
+    :root {
+      --bg: linear-gradient(135deg, #0f172a, #1e3a8a);
+      --header-bg: rgba(15, 23, 42, 0.8);
+      --card-bg: rgba(30, 41, 59, 0.9);
+      --text: #f1f5f9;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --btn-text: #0f172a;
+    }
+
+    .theme-pink {
+      --bg: linear-gradient(135deg, #3a0f2a, #8a1e5e);
+      --header-bg: rgba(42, 15, 23, 0.8);
+      --card-bg: rgba(59, 30, 41, 0.9);
+      --text: #ffe4f1;
+      --accent: #f472b6;
+      --accent-hover: #ec4899;
+      --btn-text: #3a0f2a;
+    }
+
+    .theme-green {
+      --bg: linear-gradient(135deg, #0f2a1a, #1e8a3a);
+      --header-bg: rgba(15, 42, 23, 0.8);
+      --card-bg: rgba(30, 59, 41, 0.9);
+      --text: #e8ffe4;
+      --accent: #4ade80;
+      --accent-hover: #22c55e;
+      --btn-text: #0f2a1a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bidahs' Toolbox 🧰</h1>
+    <p>More handy utilities!</p>
+  </header>
+
+  <main>
+    <!-- Number Converter -->
+    <section class="tool">
+      <h2>Number Converter</h2>
+      <input id="numInput" type="text" placeholder="Enter a number..." />
+      <button onclick="toBinary()">To Binary</button>
+      <button onclick="toDecimal()">To Decimal</button>
+      <button onclick="toHex()">To Hex</button>
+      <div id="numResult" class="result"></div>
+    </section>
+
+    <!-- Text Counter -->
+    <section class="tool">
+      <h2>Text Counter</h2>
+      <textarea id="countInput" rows="5" placeholder="Enter or paste text..."></textarea>
+      <button onclick="countText()">Count</button>
+      <div id="countResult" class="result"></div>
+    </section>
+
+    <!-- Random Color Generator -->
+    <section class="tool">
+      <h2>Random Color Generator</h2>
+      <button onclick="generateColor()">Generate</button>
+      <div id="colorResult" class="result">Your color will appear here.</div>
+    </section>
+
+    <!-- Password Generator -->
+    <section class="tool">
+      <h2>Password Generator</h2>
+      <input type="number" id="passLength" placeholder="Length (e.g. 12)" />
+      <button onclick="generatePassword()">Generate</button>
+      <button onclick="copyResult('passResult')">Copy</button>
+      <div id="passResult" class="result"></div>
+    </section>
+  </main>
+
+  <button class="nav-btn" onclick="window.location.href='index.html'">← Back to Page 1</button>
+
+  <footer>
+    <p>Built by Sebastian Booth — with 💚 | <a href="https://github.com/bidahs" target="_blank" style="color: #38bdf8;">GitHub</a></p>
+  </footer>
+
+  <script>
+    // Load theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.body.classList.add(savedTheme);
+
+    // Number Converter
+    function toBinary() {
+      const input = document.getElementById("numInput").value.trim();
+      const num = parseInt(input);
+      if (!isNaN(num)) {
+        document.getElementById("numResult").innerText = num.toString(2);
+      } else document.getElementById("numResult").innerText = "Invalid number.";
+    }
+
+    function toDecimal() {
+      const input = document.getElementById("numInput").value.trim();
+      if (/^[01]+$/.test(input)) {
+        document.getElementById("numResult").innerText = parseInt(input, 2);
+      } else if (/^[0-9A-Fa-f]+$/.test(input)) {
+        document.getElementById("numResult").innerText = parseInt(input, 16);
+      } else {
+        document.getElementById("numResult").innerText = "Invalid binary or hex input.";
+      }
+    }
+
+    function toHex() {
+      const input = document.getElementById("numInput").value.trim();
+      const num = parseInt(input);
+      if (!isNaN(num)) {
+        document.getElementById("numResult").innerText = num.toString(16).toUpperCase();
+      } else document.getElementById("numResult").innerText = "Invalid number.";
+    }
+
+    // Text Counter
+    function countText() {
+      const text = document.getElementById("countInput").value;
+      const chars = text.length;
+      const lines = text.split(/\r\n|\r|\n/).length;
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      document.getElementById("countResult").innerText = 
+        `Characters: ${chars}\nWords: ${words}\nLines: ${lines}`;
+    }
+
+    // Random Color Generator
+    function generateColor() {
+      const color = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+      const rgb = hexToRgb(color);
+      document.getElementById("colorResult").innerText = `${color} — RGB(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+      document.getElementById("colorResult").style.background = color;
+    }
+
+    function hexToRgb(hex) {
+      const bigint = parseInt(hex.slice(1), 16);
+      return {
+        r: (bigint >> 16) & 255,
+        g: (bigint >> 8) & 255,
+        b: bigint & 255
+      };
+    }
+
+    // Password Generator
+    function generatePassword() {
+      const length = parseInt(document.getElementById("passLength").value) || 12;
+      const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+      let pass = "";
+      for (let i = 0; i < length; i++) {
+        pass += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById("passResult").innerText = pass;
+    }
+
+    function copyResult(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
+    }
+  </script>
+</body>
+</html>

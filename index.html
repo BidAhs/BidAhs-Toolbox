@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bidahs' Toolbox 🧰</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --bg1: #0f172a;
+      --bg2: #1e3a8a;
+      --text: #f1f5f9;
+      --card: #1e293b;
+      --accent: #38bdf8;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem 0;
+      background: rgba(15, 23, 42, 0.8);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    header h1 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--accent); 
+      cursor: pointer; 
+      transition: opacity 0.2s ease;
+    }
+
+    #settingsBtn {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background: var(--accent);
+      color: var(--bg1);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    #settingsMenu {
+      display: none;
+      position: absolute;
+      right: 20px;
+      top: 60px;
+      background: var(--card);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    #settingsMenu button {
+      display: block;
+      width: 100%;
+      margin: 0.3rem 0;
+    }
+
+    .top-nav-btn {
+      margin: 1rem auto 2rem;
+      display: block;
+      background: var(--accent);
+      color: var(--bg1);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .top-nav-btn:hover {
+      opacity: 0.85;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section.tool {
+      background: rgba(30, 41, 59, 0.9);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, box-shadow 0.3s ease; 
+    }
+
+    section.tool:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    textarea, input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px; 
+      border: none;
+      margin-bottom: 0.5rem;
+      background: #334155;
+      color: #f8fafc;
+      resize: vertical;
+    }
+
+    button {
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: var(--bg1);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      margin-right: 0.3rem;
+      transition: background 0.2s ease; 
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    .result {
+      background: #334155;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      min-height: 60px;
+      white-space: pre-wrap;
+    }
+
+    .bottom-nav-btn {
+      margin: 2rem auto;
+      display: block;
+      background: var(--accent);
+      color: var(--bg1);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .bottom-nav-btn:hover {
+      opacity: 0.85;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.9);
+      color: #94a3b8;
+      font-size: 17px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bidahs' Toolbox 🧰</h1>
+    <button id="settingsBtn">⚙️ Settings</button>
+    <div id="settingsMenu">
+      <button onclick="setTheme('blue')">Blue</button>
+      <button onclick="setTheme('pink')">Pink</button>
+      <button onclick="setTheme('lime')">Lime</button>
+    </div>
+    <p>A simple utility hub of commonly used tools.</p>
+  </header>
+
+  <main>
+    <!-- Base64 Encoder/Decoder -->
+    <section class="tool">
+      <h2>Base64 Encoder / Decoder</h2>
+      <textarea id="base64Input" rows="4" placeholder="Enter text..."></textarea>
+      <button onclick="encodeBase64()">Encode</button>
+      <button onclick="decodeBase64()">Decode</button>
+      <button onclick="copyResult('base64Result')">Copy</button>
+      <div id="base64Result" class="result"></div>
+    </section>
+
+    <!-- Text Case Converter -->
+    <section class="tool">
+      <h2>Text Case Converter</h2>
+      <textarea id="caseInput" rows="4" placeholder="Enter text..."></textarea>
+      <button onclick="toUpper()">UPPERCASE</button>
+      <button onclick="toLower()">lowercase</button>
+      <button onclick="toTitle()">Title Case</button>
+      <button onclick="copyResult('caseResult')">Copy</button>
+      <div id="caseResult" class="result"></div>
+    </section>
+
+    <!-- Word Counter -->
+    <section class="tool">
+      <h2>Word Counter</h2>
+      <textarea id="wordInput" rows="4" placeholder="Type or paste text..."></textarea>
+      <button onclick="countWords()">Count Words</button>
+      <div id="wordResult" class="result"></div>
+    </section>
+
+    <!-- Reverse Text -->
+    <section class="tool">
+      <h2>Reverse Text Tool</h2>
+      <textarea id="reverseInput" rows="4" placeholder="Enter text..."></textarea>
+      <button onclick="reverseText()">Reverse</button>
+      <button onclick="copyResult('reverseResult')">Copy</button>
+      <div id="reverseResult" class="result"></div>
+    </section>
+
+    <!-- HEX to RGB Converter -->
+    <section class="tool">
+      <h2>HEX ↔️ RGB Converter</h2>
+      <input id="colorInput" placeholder="#38bdf8 or rgb(56,189,248)" />
+      <button onclick="hexToRgb()">To RGB</button>
+      <button onclick="rgbToHex()">To HEX</button>
+      <div id="colorResult" class="result"></div>
+    </section>
+  </main>
+
+  <button class="bottom-nav-btn" onclick="window.location.href='tools2.html'">Next Page →</button>
+
+  <footer>
+    <p>Built by Sebastian Booth — with 💙 | <a href="https://github.com/bidahs" target="_blank" style="color: #38bdf8;">GitHub</a></p>
+  </footer>
+
+  <script>
+    // Settings menu
+    const menu = document.getElementById("settingsMenu");
+    document.getElementById("settingsBtn").onclick = () => {
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    };
+
+    // Switcher
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === "pink") {
+        root.style.setProperty("--bg1", "#3b0a45");
+        root.style.setProperty("--bg2", "#b5179e");
+        root.style.setProperty("--text", "#ffe4f1");
+        root.style.setProperty("--card", "#4a0e50");
+        root.style.setProperty("--accent", "#ff61c1");
+      } else if (theme === "lime") {
+        root.style.setProperty("--bg1", "#0f3b0f");
+        root.style.setProperty("--bg2", "#1a5d1a");
+        root.style.setProperty("--text", "#eaffea");
+        root.style.setProperty("--card", "#1d4020");
+        root.style.setProperty("--accent", "#84cc16");
+      } else {
+        // Default Blue
+        root.style.setProperty("--bg1", "#0f172a");
+        root.style.setProperty("--bg2", "#1e3a8a");
+        root.style.setProperty("--text", "#f1f5f9");
+        root.style.setProperty("--card", "#1e293b");
+        root.style.setProperty("--accent", "#38bdf8");
+      }
+      menu.style.display = "none";
+    }
+
+    // --- TOOLS ---
+    function encodeBase64() {
+      const input = document.getElementById("base64Input").value;
+      try {
+        document.getElementById("base64Result").innerText = btoa(input);
+      } catch {
+        document.getElementById("base64Result").innerText = "Invalid input.";
+      }
+    }
+
+    function decodeBase64() {
+      const input = document.getElementById("base64Input").value;
+      try {
+        document.getElementById("base64Result").innerText = atob(input);
+      } catch {
+        document.getElementById("base64Result").innerText = "Invalid Base64 string.";
+      }
+    }
+
+    function toUpper() {
+      const input = document.getElementById("caseInput").value;
+      document.getElementById("caseResult").innerText = input.toUpperCase();
+    }
+
+    function toLower() {
+      const input = document.getElementById("caseInput").value;
+      document.getElementById("caseResult").innerText = input.toLowerCase();
+    }
+
+    function toTitle() {
+      const input = document.getElementById("caseInput").value;
+      const result = input.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+      document.getElementById("caseResult").innerText = result;
+    }
+
+    function countWords() {
+      const text = document.getElementById("wordInput").value.trim();
+      const words = text ? text.split(/\s+/).length : 0;
+      document.getElementById("wordResult").innerText = `Words: ${words}`;
+    }
+
+    function reverseText() {
+      const text = document.getElementById("reverseInput").value;
+      document.getElementById("reverseResult").innerText = text.split("").reverse().join("");
+    }
+
+    function hexToRgb() {
+      let hex = document.getElementById("colorInput").value.trim();
+      if (hex.startsWith("#")) hex = hex.slice(1);
+      if (hex.length === 3) hex = hex.split("").map(x => x+x).join("");
+      if (hex.length !== 6) return document.getElementById("colorResult").innerText = "Invalid HEX code.";
+      const r = parseInt(hex.substring(0,2), 16);
+      const g = parseInt(hex.substring(2,4), 16);
+      const b = parseInt(hex.substring(4,6), 16);
+      document.getElementById("colorResult").innerText = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function rgbToHex() {
+      const rgb = document.getElementById("colorInput").value.match(/\d+/g);
+      if (!rgb || rgb.length < 3) return document.getElementById("colorResult").innerText = "Invalid RGB format.";
+      const hex = `#${rgb.slice(0,3).map(x => (+x).toString(16).padStart(2,"0")).join("")}`;
+      document.getElementById("colorResult").innerText = hex;
+    }
+
+    function copyResult(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
+    }
+  </script>
+</body>
+</html>
